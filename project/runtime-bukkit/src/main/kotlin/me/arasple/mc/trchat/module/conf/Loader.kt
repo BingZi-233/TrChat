@@ -72,11 +72,7 @@ object Loader {
         Channel.channels.clear()
 
         filterChannelFiles(folder).forEach {
-            if (FileWatcher.INSTANCE.hasListener(it)) {
-                loadChannel(it)
-            } else {
-                FileWatcher.INSTANCE.addSimpleListener(it, { loadChannel(it) }, true)
-            }
+            FileWatcher.INSTANCE.addSimpleListener(it, { loadChannel(it) }, true)
         }
 
         TrChatReloadEvent.Channel(Channel.channels).call()
